@@ -1,3 +1,5 @@
+import { AddressSearchInput } from "@/components/address-search-input";
+import { DatePicker } from "@/components/date-picker";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -12,8 +14,12 @@ export function CreateNewTripCard() {
       <form>
         <CardContent className="flex flex-col gap-3">
           <Input placeholder="Destino" />
-          <Input placeholder="Início" />
-          <Input placeholder="Participantes" type="number" />
+
+          <AddressSearchInput placeholder="Endereço de hospedagem" />
+
+          <DatePicker isInsideForm>Selecione uma data de início</DatePicker> 
+
+          <Input placeholder="Participantes" type="number" min="1" />
         </CardContent>
 
         <CardFooter>

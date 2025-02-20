@@ -27,7 +27,6 @@ export function NextTripCard() {
 
           <ArrowRight />
         </Button>
-
       </CardFooter>
     </Card>
 
