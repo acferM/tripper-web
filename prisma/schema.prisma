@@ -6,3 +6,124 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum User_Role {
+  manager
+  employee
+}
+
+model User {
+  id       String    @id @default(uuid())
+  name     String
+  email    String
+  password String
+  role     User_Role
+
+  register             Register?
+  cashClosings         CashClosing[]
+  preserveTransactions PreserveTransaction[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("users")
+}
+
+model Lottery {
+  id   String @id @default(uuid())
+  name String
+
+  preserve  Preserve?
+  safe      Safe?
+  registers Register[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("lotteries")
+}
+
+model Safe {
+  id    String @id @default(uuid())
+  value Float  @default(0)
+
+  lottery    Lottery @relation(fields: [lottery_id], references: [id])
+  lottery_id String  @unique
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("safes")
+}
+
+model Register {
+  id    String @id @default(uuid())
+  value Float  @default(0)
+
+  cashClosings CashClosing[]
+
+  lottery    Lottery @relation(fields: [lottery_id], references: [id])
+  lottery_id String
+
+  operator    User   @relation(fields: [operator_id], references: [id])
+  operator_id String @unique
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("registers")
+}
+
+model CashClosing {
+  id          String @id @default(uuid())
+  final_value Float
+  image_url   String
+
+  register    Register @relation(fields: [register_id], references: [id])
+  register_id String
+
+  operator    User   @relation(fields: [operator_id], references: [id])
+  operator_id String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("cash_closings")
+}
+
+model Preserve {
+  id    String @id @default(uuid())
+  value Int
+
+  transactions PreserveTransaction[]
+
+  lottery    Lottery @relation(fields: [lottery_id], references: [id])
+  lottery_id String  @unique
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("preserves")
+}
+
+model PreserveTransaction {
+  id              String @id @default(uuid())
+  bills_2_value   Int
+  bills_5_value   Int
+  bills_10_value  Int
+  bills_20_value  Int
+  bills_50_value  Int
+  bills_100_value Int
+  bills_200_value Int
+
+  preserve    Preserve @relation(fields: [preserve_id], references: [id])
+  preserve_id String
+
+  operator    User   @relation(fields: [operator_id], references: [id])
+  operator_id String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("preserves_transactions")
+}

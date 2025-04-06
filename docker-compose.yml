@@ -1,5 +1,6 @@
 services:
   database:
+    container_name: postgres-loteria
     image: postgres
     restart: always
     ports:
