@@ -24,7 +24,7 @@ export class UsersController {
       },
       deps: {
         encryption,
-        usersRepository: usersRepository
+        usersRepository
       }
     })
 
