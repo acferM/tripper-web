@@ -1,5 +1,6 @@
 import type { Encryption } from "@/singletons/encryption"
 import type { UsersRepository } from "../repositories/users-repository"
+import { AppError } from "@/error/AppError"
 
 type CreateUserServiceParams = {
   data: {
@@ -21,8 +22,7 @@ export async function createUserService({ data, deps }: CreateUserServiceParams)
   const userExists = await usersRepository.findByEmail(data.email)
 
   if (userExists) {
-    // TODO: create error handling
-    throw Error('User already exxists')
+    throw new AppError('User already exists')
   }
 
   const hashedPassword = encryption.hash(data.password)
