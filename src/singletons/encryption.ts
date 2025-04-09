@@ -1,8 +1,8 @@
-import { compareSync, hashSync } from "bcrypt";
+import { compareSync, hashSync } from 'bcrypt';
 
 export const encryption = {
-  hash: (payload: string) => hashSync(payload, 10),
-  compare: compareSync
-}
+	hash: (payload: string) => hashSync(payload, 10),
+	compare: compareSync,
+};
 
-export type Encryption = typeof encryption
+export type Encryption = typeof encryption;

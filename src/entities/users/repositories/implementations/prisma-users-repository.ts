@@ -1,32 +1,32 @@
-import { prisma } from "@/singletons/prisma";
-import type { UsersRepository } from "../users-repository";
+import { prisma } from '@/singletons/prisma';
+import type { UsersRepository } from '../users-repository';
 
 export class PrismaUsersRepository implements UsersRepository {
-  async findById(id: string) {
-    const user = await prisma.user.findUnique({
-      where: {
-        id
-      }
-    })
+	async findById(id: string) {
+		const user = await prisma.user.findUnique({
+			where: {
+				id,
+			},
+		});
 
-    return user
-  }
+		return user;
+	}
 
-  async findByEmail(email: string) {
-    const user = await prisma.user.findUnique({
-      where: {
-        email
-      }
-    })
+	async findByEmail(email: string) {
+		const user = await prisma.user.findUnique({
+			where: {
+				email,
+			},
+		});
 
-    return user
-  }
+		return user;
+	}
 
-  async create(userData: CreateUserDTO) {
-    const user = await prisma.user.create({
-      data: userData
-    })
+	async create(userData: CreateUserDTO) {
+		const user = await prisma.user.create({
+			data: userData,
+		});
 
-    return user
-  }
+		return user;
+	}
 }

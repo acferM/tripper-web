@@ -1,23 +1,24 @@
 {
-  "name": "japa-loteria",
-  "module": "index.ts",
-  "type": "module",
-  "scripts": {
-    "dev": "bun --hot run ./src/http/server.ts"
-  },
-  "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
-    "@types/bun": "latest",
-    "@types/express": "^5.0.1",
-    "prisma": "^6.5.0"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "@prisma/client": "^6.5.0",
-    "bcrypt": "^5.1.1",
-    "express": "^5.1.0",
-    "zod": "^3.24.2"
-  }
+	"name": "japa-loteria",
+	"module": "index.ts",
+	"type": "module",
+	"scripts": {
+		"dev": "bun --hot run ./src/http/server.ts"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/bcrypt": "^5.0.2",
+		"@types/bun": "latest",
+		"@types/express": "^5.0.1",
+		"prisma": "^6.5.0"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	},
+	"dependencies": {
+		"@prisma/client": "^6.5.0",
+		"bcrypt": "^5.1.1",
+		"express": "^5.1.0",
+		"zod": "^3.24.2"
+	}
 }

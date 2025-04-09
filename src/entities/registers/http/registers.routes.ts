@@ -1,8 +1,8 @@
-import { Router } from "express";
-import { RegistersController } from "./controllers/registers-controller";
+import { Router } from 'express';
+import { RegistersController } from './controllers/registers-controller';
 
-const registersController = new RegistersController()
+const registersController = new RegistersController();
 
-export const registersRouter = Router()
+export const registersRouter = Router();
 
-registersRouter.post('/', registersController.create)
+registersRouter.post('/', registersController.create);
