@@ -1,10 +1,10 @@
-import type { CreateRegisterBody } from '@/entities/contracts/create-register-contract';
 import { PrismaLotteriesRepository } from '@/entities/lotteries/repositories/implementations/prisma-lotteries-repository';
 import { PrismaUsersRepository } from '@/entities/users/repositories/implementations/prisma-users-repository';
 import { HttpErrorHandler } from '@/utils/http-error-handler';
 import type { Request, Response } from 'express';
 import { PrismaRegisterRepository } from '../../repositories/implementations/prisma-registers-repository';
 import { CreateRegisterService } from '../../services/create-register-service';
+import type { CreateRegisterBody } from '../../contracts/create-register-contract';
 
 type CreateRequest = Request<unknown, unknown, CreateRegisterBody>;
 type CreateResponse = Response<RegisterWithoutOperatorPassword>;
