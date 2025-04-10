@@ -11,23 +11,23 @@ type CreateResponse = Response<Omit<User, 'password'>>;
 const usersRepository = new PrismaUsersRepository();
 
 export class UsersController {
-	@HttpErrorHandler()
-	async create(request: CreateRequest, response: CreateResponse) {
-		const { email, name, password, role } = request.body;
+  @HttpErrorHandler()
+  async create(request: CreateRequest, response: CreateResponse) {
+    const { email, name, password, role } = request.body;
 
-		const user = await createUserService({
-			data: {
-				email,
-				name,
-				password,
-				role,
-			},
-			deps: {
-				encryption,
-				usersRepository,
-			},
-		});
+    const user = await createUserService({
+      data: {
+        email,
+        name,
+        password,
+        role,
+      },
+      deps: {
+        encryption,
+        usersRepository,
+      },
+    });
 
-		response.status(201).json(user);
-	}
+    response.status(201).json(user);
+  }
 }

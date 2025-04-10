@@ -14,22 +14,22 @@ const usersRepository = new PrismaUsersRepository();
 const lotteriesRepository = new PrismaLotteriesRepository();
 
 export class RegistersController {
-	@HttpErrorHandler()
-	async create(request: CreateRequest, response: CreateResponse) {
-		const { lottery_id, operator_id } = request.body;
+  @HttpErrorHandler()
+  async create(request: CreateRequest, response: CreateResponse) {
+    const { lottery_id, operator_id } = request.body;
 
-		const register = await CreateRegisterService({
-			data: {
-				lottery_id,
-				operator_id,
-			},
-			deps: {
-				registersRepository,
-				lotteriesRepository,
-				usersRepository,
-			},
-		});
+    const register = await CreateRegisterService({
+      data: {
+        lottery_id,
+        operator_id,
+      },
+      deps: {
+        registersRepository,
+        lotteriesRepository,
+        usersRepository,
+      },
+    });
 
-		response.status(201).json(register);
-	}
+    response.status(201).json(register);
+  }
 }

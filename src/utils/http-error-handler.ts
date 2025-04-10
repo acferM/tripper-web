@@ -4,33 +4,33 @@ import type { Request, Response } from 'express';
 type HttpMethodParams = [Request, Response, ...unknown[]];
 
 export function HttpErrorHandler() {
-	return (_: unknown, __: string, descriptor: PropertyDescriptor) => {
-		const originalMethod = descriptor.value;
+  return (_: unknown, __: string, descriptor: PropertyDescriptor) => {
+    const originalMethod = descriptor.value;
 
-		descriptor.value = async function (...args: HttpMethodParams) {
-			const [, response] = args;
+    descriptor.value = async function (...args: HttpMethodParams) {
+      const [, response] = args;
 
-			try {
-				const result = await originalMethod.apply(this, args);
+      try {
+        const result = await originalMethod.apply(this, args);
 
-				return result;
-			} catch (err) {
-				if (err instanceof AppError) {
-					return response.status(err.code).json({
-						message: err.message,
-						statusCode: err.code,
-					});
-				}
+        return result;
+      } catch (err) {
+        if (err instanceof AppError) {
+          return response.status(err.code).json({
+            message: err.message,
+            statusCode: err.code,
+          });
+        }
 
-				console.log(err);
+        console.log(err);
 
-				return response.status(500).json({
-					message: 'Internal server error',
-					statusCode: 500,
-				});
-			}
-		};
+        return response.status(500).json({
+          message: 'Internal server error',
+          statusCode: 500,
+        });
+      }
+    };
 
-		return descriptor;
-	};
+    return descriptor;
+  };
 }

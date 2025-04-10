@@ -1,3 +1,3 @@
 export interface LotteriesRepository {
-	findById: (id: string) => Promise<Lottery | null>;
+  findById: (id: string) => Promise<Lottery | null>;
 }
