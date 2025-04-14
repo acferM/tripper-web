@@ -36,7 +36,7 @@ export class PrismaPreservesRepository implements PreservesRepository {
     return passage;
   }
 
-  async updateValue({ preserve_id, operation, value }: UpdateValueDTO) {
+  async updateValue({ preserve_id, operation, value }: UpdatePreserveValueDTO) {
     const updatedPreserve = await prisma.preserve.update({
       where: {
         id: preserve_id,

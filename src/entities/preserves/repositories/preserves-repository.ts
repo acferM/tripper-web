@@ -14,5 +14,5 @@ export interface PreservesRepository {
     options?: RelationsOptions,
   ) => Promise<PreserveWithRelations<Keys> | null>;
   createPassage: (passageData: CreatePassageDTO) => Promise<PreservePassage>;
-  updateValue: (updateData: UpdateValueDTO) => Promise<Preserve>;
+  updateValue: (updateData: UpdatePreserveValueDTO) => Promise<Preserve>;
 }

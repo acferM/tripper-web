@@ -3,7 +3,7 @@ type CreatePassageDTO = {
   value: number;
 };
 
-type UpdateValueDTO = {
+type UpdatePreserveValueDTO = {
   preserve_id: string;
   value: number;
   operation: 'increment' | 'decrement';
