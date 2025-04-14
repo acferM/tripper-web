@@ -2,6 +2,16 @@ import { prisma } from '@/singletons/prisma';
 import type { SafesRepository } from '../safes-repository';
 
 export class PrismaSafesRepository implements SafesRepository {
+  async findById(id: string) {
+    const preserve = await prisma.safe.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    return preserve;
+  }
+
   async findByLotteryId(lottery_id: string) {
     const preserve = await prisma.safe.findUnique({
       where: {
