@@ -7,6 +7,7 @@ import { authenticateUserService } from '../../services/authenticate-user-servic
 import { PrismaUsersRepository } from '../../repositories/implementations/prisma-users-repository';
 import { encryption } from '@/singletons/encryption';
 import { jwt } from '@/singletons/jwt';
+import { HttpErrorHandler } from '@/utils/http-error-handler';
 
 type CreateRequest = Request<unknown, unknown, CreateUserAuthenticationBody>;
 type CreateResponse = Response<CreateUserAuthenticationResponse>;
@@ -14,6 +15,7 @@ type CreateResponse = Response<CreateUserAuthenticationResponse>;
 const usersRepository = new PrismaUsersRepository();
 
 export class UsersAuthenticationController {
+  @HttpErrorHandler()
   async create(request: CreateRequest, response: CreateResponse) {
     const { email, password } = request.body;
 

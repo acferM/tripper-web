@@ -5,9 +5,11 @@ export type LotteryWithRelations<
 > = AddRelations<Lottery, RelationsKeys>;
 
 export type RelationsOptions = {
-  preserve: boolean;
-  safe: boolean;
-  registers: boolean;
+  employement?: boolean;
+  owner?: boolean;
+  preserve?: boolean;
+  safe?: boolean;
+  registers?: boolean;
 };
 
 export interface LotteriesRepository {

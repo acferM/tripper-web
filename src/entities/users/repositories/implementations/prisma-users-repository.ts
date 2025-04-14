@@ -37,9 +37,16 @@ export class PrismaUsersRepository implements UsersRepository {
     return employement.employees;
   }
 
-  async create(userData: CreateUserDTO) {
+  async create({ lotteryEmployement_id, ...userData }: CreateUserDTO) {
     const user = await prisma.user.create({
-      data: userData,
+      data: {
+        ...userData,
+        lotteryEmployement: {
+          connect: {
+            id: lotteryEmployement_id,
+          },
+        },
+      },
     });
 
     return user;

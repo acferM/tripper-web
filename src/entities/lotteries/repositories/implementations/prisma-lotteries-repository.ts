@@ -15,11 +15,7 @@ export class PrismaLotteriesRepository implements LotteriesRepository {
       where: {
         id,
       },
-      include: {
-        preserve: options?.preserve ?? false,
-        registers: options?.registers ?? false,
-        safe: options?.safe ?? false,
-      },
+      include: options,
     })) as LotteryWithRelations<Keys> | null;
 
     return lottery;

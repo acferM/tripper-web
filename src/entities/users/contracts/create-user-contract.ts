@@ -3,6 +3,7 @@ import { z } from 'zod';
 const userRole = z.enum(['manager', 'employee']);
 
 const createUserBody = z.object({
+  lottery_id: z.string().uuid(),
   name: z.string({ message: 'Name is required' }),
   email: z
     .string({ message: 'Email is rquired' })
