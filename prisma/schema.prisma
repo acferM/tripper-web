@@ -22,6 +22,10 @@ model User {
   register             Register?
   cashClosings         CashClosing[]
   preserveTransactions PreserveTransaction[]
+  ownedLottery         Lottery?
+
+  lotteryEmployement     LotteryEmployees? @relation(fields: [lottery_employement_id], references: [id])
+  lottery_employement_id String?
 
   created_at DateTime @default(now())
   updated_at DateTime @default(now()) @updatedAt
@@ -33,14 +37,31 @@ model Lottery {
   id   String @id @default(uuid())
   name String
 
-  preserve  Preserve?
-  safe      Safe?
-  registers Register[]
+  owner    User   @relation(fields: [owner_id], references: [id])
+  owner_id String @unique
+
+  employement LotteryEmployees?
+  preserve    Preserve?
+  safe        Safe?
+  registers   Register[]
 
   created_at DateTime @default(now())
   updated_at DateTime @default(now()) @updatedAt
 
   @@map("lotteries")
+}
+
+model LotteryEmployees {
+  id String @id @default(uuid())
+
+  lottery    Lottery @relation(fields: [lottery_id], references: [id])
+  lottery_id String  @unique
+  employees  User[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("lotteries_employees")
 }
 
 model Safe {
