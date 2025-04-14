@@ -22,6 +22,21 @@ export class PrismaUsersRepository implements UsersRepository {
     return user;
   }
 
+  async findEmployeesFromLottery(lottery_id: string) {
+    const employement = await prisma.lotteryEmployees.findUnique({
+      where: {
+        lottery_id,
+      },
+      include: {
+        employees: true,
+      },
+    });
+
+    if (!employement) return null;
+
+    return employement.employees;
+  }
+
   async create(userData: CreateUserDTO) {
     const user = await prisma.user.create({
       data: userData,
