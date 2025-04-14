@@ -121,6 +121,8 @@ model Preserve {
   lottery    Lottery @relation(fields: [lottery_id], references: [id])
   lottery_id String  @unique
 
+  passages PreservePassages[]
+
   created_at DateTime @default(now())
   updated_at DateTime @default(now()) @updatedAt
 
@@ -147,4 +149,17 @@ model PreserveTransaction {
   updated_at DateTime @default(now()) @updatedAt
 
   @@map("preserves_transactions")
+}
+
+model PreservePassages {
+  id    String @id @default(uuid())
+  value Int
+
+  preserve    Preserve @relation(fields: [preserve_id], references: [id])
+  preserve_id String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("preserves_passages")
 }
